@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services | Abhishek Thakur – Design Lead &amp; Creative Technologist</title>
+<meta name="description" content="Creative services by Abhishek Thakur — Brand Identity, Marketing Design, Motion Graphics, and AI-Powered Creative Production for enterprise organizations.">
+<meta name="author" content="Abhishek Thakur">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Services | Abhishek Thakur">
+<meta property="og:description" content="Brand Identity, Marketing Design, Motion Graphics, and AI-Powered Creative Production for enterprise organizations.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://abhishekthakur.design/services">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Services | Abhishek Thakur">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Nunito:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+<style>
+/* ═══ BASE ═══ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#0d0b0e;--hot-pink:#f0195a;--blue:#4a6cf7;--cobalt:#3d5ee0;
+  --purple:#7c3aed;--violet:#6d28d9;--orange:#f97316;--yellow:#facc15;--white:#fff;
+  --ff-display:"Fredoka",sans-serif;--ff-body:"Nunito",sans-serif;
+}
+html{overflow-x:hidden;scroll-behavior:auto}
+body{background:var(--black);color:var(--white);font-family:var(--ff-body);overflow-x:hidden;cursor:none}
+
+/* ── CURSOR ── */
+#cdot,#cring{position:fixed;border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%)}
+#cdot{width:10px;height:10px;background:var(--hot-pink);transition:width .2s,height .2s;mix-blend-mode:difference}
+#cring{width:40px;height:40px;border:2px solid rgba(240,25,90,.45);z-index:99998;transition:width .25s,height .25s,border-color .25s}
+body.hov #cdot{width:18px;height:18px}
+body.hov #cring{width:62px;height:62px;border-color:rgba(240,25,90,.25)}
+
+/* ── LOADER ── */
+#loader{position:fixed;inset:0;background:var(--black);z-index:99990;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px}
+#loader.out{animation:ldrSl .9s cubic-bezier(.76,0,.24,1) forwards}
+@keyframes ldrSl{to{transform:translateY(-100%)}}
+.ldr-logo{font-family:var(--ff-display);font-size:36px;font-weight:700;background:linear-gradient(110deg,var(--hot-pink) 0%,var(--violet) 50%,var(--yellow) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ldr-bar-wrap{width:240px;height:3px;background:#222;border-radius:3px;overflow:hidden}
+.ldr-bar{height:100%;background:linear-gradient(90deg,var(--hot-pink),var(--violet));width:0%;border-radius:3px}
+.ldr-pct{font-size:12px;color:#444;font-weight:700;letter-spacing:.1em}
+
+/* ── NAV ── */
+#nav{position:fixed;top:0;left:0;right:0;z-index:9000;padding:14px 48px;display:flex;align-items:center;justify-content:space-between;transition:background .4s,backdrop-filter .4s}
+#nav.scrolled{background:rgba(13,11,14,.88);backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.05)}
+.nav-logo{display:inline-flex;align-items:center;text-decoration:none;width:148px;flex-shrink:0;opacity:.95;transition:opacity .2s}
+.nav-logo:hover{opacity:1}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.7);text-decoration:none;font-size:15px;font-weight:700;transition:color .2s;position:relative;padding-bottom:3px}
+.nav-links a.active{color:var(--yellow)}
+.nav-links a.active::after,.nav-links a:hover::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--yellow);border-radius:2px}
+.nav-links a:hover{color:var(--white)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.btn-talk{background:var(--white);color:var(--black);padding:11px 22px;border-radius:100px;font-family:var(--ff-body);font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;display:inline-flex;align-items:center;transition:background .2s,transform .2s,box-shadow .2s;white-space:nowrap}
+.btn-talk:hover{background:var(--yellow);transform:translateY(-2px);box-shadow:0 6px 22px rgba(250,204,21,.35)}
+.nav-sun{background:none;border:none;cursor:none;font-size:17px;color:rgba(255,255,255,.5);padding:4px;transition:color .2s;line-height:1}
+.nav-sun:hover{color:var(--white)}
+
+/* ── REVEAL ── */
+.jr{opacity:0;transform:translateY(44px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+.jr.vis{opacity:1;transform:none}
+
+/* ── FOOTER ── */
+footer{background:var(--black);padding:60px 80px 36px;border-top:1px solid rgba(255,255,255,.05)}
+.ft-logo{display:block;width:180px;margin-bottom:24px;opacity:.8;text-decoration:none;transition:opacity .2s}
+.ft-logo:hover{opacity:1}
+.ft-nav{display:flex;gap:28px;flex-wrap:wrap;margin-bottom:28px}
+.ft-nav a{color:rgba(255,255,255,.45);text-decoration:none;font-size:14px;font-weight:700;transition:color .2s}
+.ft-nav a:hover{color:var(--white)}
+.ft-socials{display:flex;gap:12px;margin-bottom:40px}
+.ft-soc{width:42px;height:42px;border-radius:50%;border:1.5px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);text-decoration:none;font-size:13px;font-weight:700;transition:border-color .2s,color .2s,transform .2s}
+.ft-soc:hover{border-color:var(--hot-pink);color:var(--hot-pink);transform:translateY(-3px)}
+.ft-bot{display:flex;align-items:center;justify-content:space-between;padding-top:22px;border-top:1px solid rgba(255,255,255,.06)}
+.ft-copy{font-size:13px;color:rgba(255,255,255,.22)}
+.ft-ai{font-size:12px;color:rgba(255,255,255,.18);font-style:italic}
+
+/* ═══ HERO ═══ */
+#sv-hero{position:relative;min-height:82vh;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:110px 80px 72px;text-align:center}
+.sv-hero-gl{position:absolute;left:-80px;top:15%;width:520px;height:520px;background:radial-gradient(circle,rgba(240,25,90,.22) 0%,transparent 68%);pointer-events:none;z-index:1}
+.sv-hero-gr{position:absolute;right:-80px;bottom:0;width:520px;height:520px;background:radial-gradient(circle,rgba(109,40,217,.22) 0%,transparent 68%);pointer-events:none;z-index:1}
+.sv-stars{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.star{position:absolute;background:rgba(255,255,255,.55);border-radius:50%}
+.sv-hero-inner{position:relative;z-index:5;max-width:820px}
+.sv-h-pill{display:inline-flex;background:rgba(240,25,90,.14);color:var(--hot-pink);padding:8px 20px;border-radius:100px;font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;margin-bottom:28px;border:1px solid rgba(240,25,90,.28)}
+.sv-h1{font-family:var(--ff-display);font-size:clamp(62px,10vw,130px);font-weight:700;line-height:.88;letter-spacing:-.035em;margin-bottom:24px}
+.sv-hline{display:block;overflow:hidden}
+.sv-hline-in{display:block;transform:translateY(112%)}
+.sv-h-sub{font-size:clamp(16px,1.8vw,20px);font-weight:500;color:rgba(255,255,255,.62);line-height:1.68;max-width:660px;margin:0 auto 36px;opacity:0;transform:translateY(18px)}
+.sv-h-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;opacity:0;transform:translateY(18px)}
+.btn-primary-sv{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--cobalt),var(--violet));color:var(--white);padding:15px 30px;border-radius:100px;font-family:var(--ff-body);font-weight:800;font-size:13px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:transform .2s,box-shadow .2s}
+.btn-primary-sv:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(76,108,247,.4)}
+.btn-sec-sv{display:inline-flex;align-items:center;gap:10px;border:2px solid rgba(255,255,255,.28);color:var(--white);padding:15px 30px;border-radius:100px;font-family:var(--ff-body);font-weight:800;font-size:13px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;background:rgba(255,255,255,.06);transition:border-color .2s,transform .2s,background .2s}
+.btn-sec-sv:hover{border-color:rgba(255,255,255,.6);background:rgba(255,255,255,.12);transform:translateY(-3px)}
+
+/* ── SERVICE QUICK NAV STRIP ── */
+#sv-nav-strip{background:rgba(255,255,255,.04);border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07);padding:0 80px;display:flex;align-items:stretch;gap:0;overflow:hidden}
+.svns-item{flex:1;padding:18px 0;text-align:center;text-decoration:none;color:rgba(255,255,255,.45);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;transition:color .2s,background .2s;border-right:1px solid rgba(255,255,255,.07);position:relative}
+.svns-item:last-child{border-right:none}
+.svns-item:hover{color:var(--white);background:rgba(255,255,255,.04)}
+.svns-item .svns-num{display:block;font-family:var(--ff-display);font-size:20px;font-weight:700;color:inherit;margin-bottom:2px}
+
+/* ═══ SERVICE SECTIONS ═══ */
+.sv-section{position:relative;padding:96px 80px;overflow:hidden;border-bottom:1px solid rgba(255,255,255,.05)}
+.sv-section::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0,rgba(255,255,255,.018) 1px,transparent 1px,transparent 60px),repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0,rgba(255,255,255,.018) 1px,transparent 1px,transparent 60px);pointer-events:none;z-index:0}
+.sv-alt{background:rgba(255,255,255,.015)}
+.sv-inner{position:relative;z-index:2;display:grid;grid-template-columns:280px 1fr;gap:60px;align-items:start;max-width:1200px;margin:0 auto}
+.sv-glow{position:absolute;top:-20%;right:-10%;width:600px;height:600px;pointer-events:none;z-index:1;opacity:.7}
+
+/* Left meta */
+.sv-meta{position:sticky;top:100px}
+.sv-tag{display:inline-flex;padding:7px 16px;border-radius:100px;border-width:1.5px;border-style:solid;font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;margin-bottom:20px}
+.sv-num-big{font-family:var(--ff-display);font-size:clamp(80px,10vw,140px);font-weight:700;line-height:1;letter-spacing:-.04em;opacity:.18;margin-bottom:28px}
+.sv-best-card{background:rgba(255,255,255,.05);border-left-width:3px;border-left-style:solid;border-radius:0 12px 12px 0;padding:16px 20px}
+.sv-best-lbl{font-size:9px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:8px}
+.sv-best-txt{font-size:14px;font-weight:500;color:rgba(255,255,255,.68);line-height:1.6}
+
+/* Right content */
+.sv-content{padding-top:4px}
+.sv-title{font-family:var(--ff-display);font-size:clamp(34px,4vw,58px);font-weight:700;letter-spacing:-.025em;line-height:1.05;margin-bottom:20px;color:var(--white)}
+.sv-desc{font-size:17px;font-weight:500;color:rgba(255,255,255,.72);line-height:1.72;margin-bottom:28px;max-width:640px}
+.sv-divider{height:2px;width:48px;border-radius:2px;margin-bottom:20px}
+.sv-inc-lbl{font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:16px}
+.sv-bullets{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:10px 24px;margin-bottom:28px}
+.sv-bullet{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:rgba(255,255,255,.78)}
+.sv-bullet-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.sv-tools-wrap{margin-top:4px}
+.sv-tools-lbl{font-size:10px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.32);margin-bottom:12px}
+.sv-tools{display:flex;flex-wrap:wrap;gap:8px}
+.sv-tool-chip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.65);padding:6px 14px;border-radius:100px;font-size:12px;font-weight:600;transition:background .2s,color .2s}
+.sv-tool-chip:hover{background:rgba(255,255,255,.14);color:var(--white)}
+
+/* ═══ PROCESS ═══ */
+#sv-process{background:var(--black);padding:96px 80px;position:relative;overflow:hidden}
+#sv-process::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0,rgba(255,255,255,.018) 1px,transparent 1px,transparent 60px),repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0,rgba(255,255,255,.018) 1px,transparent 1px,transparent 60px);pointer-events:none}
+.sv-process-head{max-width:1200px;margin:0 auto 56px}
+.sv-sec-pill{display:inline-flex;background:rgba(255,255,255,.08);color:rgba(255,255,255,.65);padding:8px 20px;border-radius:100px;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px}
+.sv-sec-h{font-family:var(--ff-display);font-size:clamp(38px,5vw,66px);font-weight:700;letter-spacing:-.025em;color:var(--white);line-height:1}
+.sv-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1200px;margin:0 auto;border:1px solid rgba(255,255,255,.07);border-radius:20px;overflow:hidden}
+.sv-step{padding:36px 32px;border-right:1px solid rgba(255,255,255,.07);position:relative;background:rgba(255,255,255,.02);transition:background .3s}
+.sv-step:hover{background:rgba(255,255,255,.05)}
+.sv-step:last-child{border-right:none}
+.sv-step-num{font-family:var(--ff-display);font-size:48px;font-weight:700;color:var(--yellow);letter-spacing:-.03em;line-height:1;margin-bottom:16px;opacity:.9}
+.sv-step-title{font-family:var(--ff-display);font-size:20px;font-weight:700;color:var(--white);letter-spacing:-.01em;margin-bottom:12px;line-height:1.2}
+.sv-step-desc{font-size:14px;font-weight:500;color:rgba(255,255,255,.58);line-height:1.65}
+.sv-step-line{position:absolute;top:52px;right:-1px;width:1px;height:32px;background:var(--yellow);opacity:.4}
+.sv-step:last-child .sv-step-line{display:none}
+
+/* ═══ FAQ ═══ */
+#sv-faq{background:var(--cobalt);padding:96px 80px;position:relative;overflow:hidden}
+#sv-faq::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 1px,transparent 40px),repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0,rgba(255,255,255,.025) 1px,transparent 1px,transparent 40px);pointer-events:none}
+#sv-faq::after{content:'';position:absolute;right:-80px;top:-80px;width:400px;height:400px;background:rgba(255,255,255,.07);border-radius:50%;pointer-events:none}
+.sv-faq-inner{position:relative;z-index:1;max-width:860px;margin:0 auto}
+.sv-faq-head{margin-bottom:48px}
+.sv-faq-pill{display:inline-flex;background:rgba(255,255,255,.18);color:var(--white);padding:8px 20px;border-radius:100px;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px}
+.sv-faq-h{font-family:var(--ff-display);font-size:clamp(36px,5vw,62px);font-weight:700;letter-spacing:-.025em;color:var(--white);line-height:1}
+
+.faq-item{border-bottom:1px solid rgba(255,255,255,.14);overflow:hidden}
+.faq-item:first-child{border-top:1px solid rgba(255,255,255,.14)}
+.faq-q{width:100%;background:none;border:none;padding:22px 0;display:flex;align-items:center;justify-content:space-between;gap:20px;cursor:pointer;text-align:left;color:var(--white);font-family:var(--ff-body);font-size:17px;font-weight:700;line-height:1.4;transition:color .2s}
+.faq-q:hover{color:var(--yellow)}
+.faq-q[aria-expanded="true"]{color:var(--yellow)}
+.faq-icon{flex-shrink:0;width:32px;height:32px;border-radius:50%;border:1.5px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;transition:border-color .2s,transform .4s,background .2s}
+.faq-q[aria-expanded="true"] .faq-icon{transform:rotate(45deg);border-color:var(--yellow);background:rgba(250,204,21,.12)}
+.faq-q[aria-expanded="true"] .faq-icon svg{stroke:var(--yellow)}
+.faq-body{overflow:hidden}
+.faq-a{padding:0 40px 22px 0;font-size:15px;font-weight:500;color:rgba(255,255,255,.78);line-height:1.72}
+
+/* ═══ CTA ═══ */
+#sv-cta{position:relative;padding:110px 80px;overflow:hidden;background:linear-gradient(140deg,var(--orange) 0%,var(--hot-pink) 55%,#c026d3 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:480px}
+.sv-cta-b1{position:absolute;left:7%;top:18%;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,.18);animation:svBlob 5s ease-in-out infinite}
+.sv-cta-b2{position:absolute;right:9%;bottom:18%;width:86px;height:86px;border-radius:18px;background:rgba(255,255,255,.12);animation:svBlob 7s ease-in-out infinite 1.2s}
+@keyframes svBlob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-22px) rotate(9deg)}}
+.sv-cta-h{font-family:var(--ff-display);font-size:clamp(48px,7vw,106px);font-weight:700;letter-spacing:-.03em;color:var(--white);line-height:.92;margin-bottom:20px;position:relative;z-index:1}
+.sv-cta-p{font-size:19px;font-weight:500;color:rgba(255,255,255,.85);max-width:580px;line-height:1.6;margin-bottom:40px;position:relative;z-index:1}
+.btn-cta{display:inline-flex;align-items:center;gap:12px;background:#1e1b4b;color:var(--white);padding:18px 44px;border-radius:100px;font-family:var(--ff-body);font-weight:800;font-size:14px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;position:relative;z-index:1;transition:transform .22s,box-shadow .22s}
+.btn-cta:hover{transform:translateY(-5px) scale(1.02);box-shadow:0 18px 52px rgba(0,0,0,.38)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:1100px){
+  .sv-inner{grid-template-columns:220px 1fr;gap:40px}
+  .sv-steps{grid-template-columns:repeat(2,1fr)}
+  .sv-step:nth-child(2){border-right:none}
+  .sv-step:nth-child(1),.sv-step:nth-child(2){border-bottom:1px solid rgba(255,255,255,.07)}
+  .sv-step-line{display:none}
+}
+@media(max-width:900px){
+  #nav{padding:12px 22px}.nav-links{display:none}
+  #sv-hero{padding:100px 24px 64px}
+  #sv-nav-strip{display:none}
+  .sv-section{padding:72px 28px}
+  .sv-inner{grid-template-columns:1fr;gap:32px}
+  .sv-meta{position:static;display:flex;flex-wrap:wrap;align-items:center;gap:20px}
+  .sv-num-big{font-size:80px;margin-bottom:0;margin-right:8px}
+  .sv-best-card{flex:1;min-width:220px}
+  .sv-bullets{grid-template-columns:1fr}
+  #sv-process{padding:72px 28px}
+  .sv-steps{grid-template-columns:1fr;border-radius:16px}
+  .sv-step{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
+  .sv-step:last-child{border-bottom:none}
+  #sv-faq{padding:72px 28px}
+  #sv-cta{padding:80px 24px}
+  footer{padding:48px 24px 32px}
+  .ft-bot{flex-direction:column;gap:10px;align-items:flex-start}
+}
+@media(max-width:580px){
+  .sv-h-btns{flex-direction:column;align-items:center}
+  .sv-title{font-size:30px}
+  .sv-steps{grid-template-columns:1fr}
+}
+
+/* ── WHATSAPP CTA ── */
+.ft-wa-wrap{margin-bottom:28px}
+.ft-wa-label{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:12px}
+.ft-wa{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:14px 28px;border-radius:100px;font-family:var(--ff-body);font-weight:800;font-size:14px;text-decoration:none;transition:transform .22s,box-shadow .22s,background .2s}
+.ft-wa:hover{background:#1ebe5d;transform:translateY(-3px);box-shadow:0 10px 32px rgba(37,211,102,.4)}
+.ft-wa svg{flex-shrink:0}
+
+/* ── FOOTER 3-COLUMN LAYOUT ── */
+footer{padding:64px 80px 36px}
+.ft-inner{display:grid;grid-template-columns:1fr auto 1fr;gap:64px;margin-bottom:48px;align-items:start}
+.ft-col{display:flex;flex-direction:column;align-items:flex-start}
+.ft-col-mid{align-items:center}
+.ft-col-right{align-items:flex-end}
+.ft-tagline{font-size:12px;font-weight:600;color:rgba(255,255,255,.3);margin-top:14px;max-width:210px;line-height:1.7;letter-spacing:.01em}
+.ft-logo{margin-bottom:0!important}
+.ft-nav{flex-direction:column!important;align-items:center!important;gap:13px!important;margin-bottom:0!important}
+.ft-nav a{text-align:center!important}
+.ft-wa-wrap{margin-bottom:20px!important;text-align:right}
+.ft-wa-label{text-align:right}
+.ft-socials{margin-bottom:0!important;justify-content:flex-end}
+.ft-bot{margin-top:0}
+/* tablet */
+@media(max-width:1100px){.ft-inner{gap:40px}footer{padding:56px 48px 32px}}
+/* mobile */
+@media(max-width:900px){
+  .ft-inner{grid-template-columns:1fr!important;gap:36px}
+  .ft-col,.ft-col-mid,.ft-col-right{align-items:flex-start!important}
+  .ft-nav{align-items:flex-start!important}
+  .ft-nav a{text-align:left!important}
+  .ft-wa-wrap,.ft-wa-label{text-align:left!important}
+  .ft-socials{justify-content:flex-start!important}
+  footer{padding:48px 24px 28px}
+  .ft-bot{flex-direction:column;gap:10px;align-items:flex-start}
+}
+/* small mobile — center everything */
+@media(max-width:480px){
+  .ft-col,.ft-col-mid,.ft-col-right{align-items:center!important}
+  .ft-nav{align-items:center!important}
+  .ft-nav a,.ft-wa-wrap,.ft-wa-label{text-align:center!important}
+  .ft-socials{justify-content:center!important}
+  .ft-tagline{text-align:center;max-width:100%}
+  .ft-bot{align-items:center!important}
+}
+
+/* ── FOOTER RECOMMENDATION ── */
+.ft-rec{display:flex;align-items:center;gap:6px;margin-bottom:20px}
+.ft-rec-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.2)}
+.ft-rec-link{font-size:10px;font-weight:600;color:rgba(255,255,255,.25);text-decoration:none;transition:color .2s;letter-spacing:.01em}
+.ft-rec-link:hover{color:rgba(255,255,255,.55)}
+.ft-rec-sep{color:rgba(255,255,255,.15);font-size:10px}
+
+/* ── FOOTER COLUMN RIGHT — centered ── */
+.ft-col-right{align-items:center!important}
+.ft-wa-wrap{text-align:center!important}
+.ft-wa-label{text-align:center!important}
+.ft-socials{justify-content:center!important}
+
+/* ── MOBILE NAV ── */
+.ham{display:none;flex-direction:column;justify-content:center;gap:5px;width:38px;height:38px;background:none;border:none;cursor:pointer;padding:4px;flex-shrink:0}
+.ham span{display:block;width:22px;height:2px;background:var(--white);border-radius:2px;transition:transform .35s cubic-bezier(.76,0,.24,1),opacity .25s,width .35s}
+.ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.ham.open span:nth-child(2){opacity:0;width:0}
+.ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+#mob-nav{position:fixed;inset:0;z-index:9000;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:28px;background:rgba(13,11,14,.97);backdrop-filter:blur(24px);transform:translateX(100%);transition:transform .45s cubic-bezier(.76,0,.24,1);pointer-events:none}
+#mob-nav.open{transform:translateX(0);pointer-events:all}
+.mob-link{font-family:var(--ff-display);font-size:clamp(36px,8vw,58px);font-weight:700;color:rgba(255,255,255,.55);text-decoration:none;letter-spacing:-.025em;transition:color .2s,transform .35s,opacity .35s;transform:translateY(18px);opacity:0}
+#mob-nav.open .mob-link{opacity:1;transform:none}
+.mob-link:nth-child(1){transition-delay:.08s}.mob-link:nth-child(2){transition-delay:.14s}.mob-link:nth-child(3){transition-delay:.20s}.mob-link:nth-child(4){transition-delay:.26s}.mob-link:nth-child(5){transition-delay:.32s}
+.mob-link:hover,.mob-link.active{color:var(--yellow)}
+.mob-talk{margin-top:12px;background:var(--white);color:var(--black);padding:14px 32px;border-radius:100px;font-family:var(--ff-body);font-weight:800;font-size:14px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:background .2s,transform .35s,opacity .35s;transform:translateY(18px);opacity:0;transition-delay:.38s}
+#mob-nav.open .mob-talk{opacity:1;transform:none}
+.mob-talk:hover{background:var(--yellow)}
+@media(max-width:900px){.ham{display:flex}}
+</style>
+</head>
+<body>
+<div id="cdot"></div><div id="cring"></div>
+
+<!-- LOADER -->
+
+<!-- MOBILE NAV OVERLAY -->
+<div id="mob-nav" role="dialog" aria-label="Mobile navigation">
+  <a href="index.html" class="mob-link">Home</a>
+  <a href="services.html" class="mob-link active">Services</a>
+  <a href="work.html" class="mob-link">Work</a>
+  <a href="about.html" class="mob-link">About</a>
+  <a href="resume.html" class="mob-link">Resume</a>
+  <a href="mailto:thakur.abhishek95@gmail.com?subject=Project%20Inquiry" class="mob-talk">LET'S TALK</a>
+</div>
+<div id="loader">
+  <div class="ldr-logo">Abhishek Thakur</div>
+  <div class="ldr-bar-wrap"><div class="ldr-bar" id="lbar"></div></div>
+  <div class="ldr-pct" id="lpct">0%</div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo" aria-label="Abhishek Thakur home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 498.31" role="img" aria-label="Abhishek Thakur" id="logo-nav-sv" style="display:block;width:100%;height:auto">
+  <path fill="#ffffff" d="M643.65,237.94l-29.43,20.78c6.33,13.13,20.04,25.09,34.1,23.13,28.11-3.93,58.58-21.25,87.88-22.92l-63.14,21.85-21.6,5.61c-9.59,2.49-20.18-.28-28.32-5.82-7.12-4.84-11.75-11.23-17.35-18.47l-7.64,23.77c-.39,1.21-3.81,1.89-4.96,1.43-1.35-.53-3.26-3.39-2.97-4.87l3.03-15.45c-11.34,10.46-27.49,25.99-40.24,18.83-4.7-2.64-6.25-7.12-5.58-13.14-7.65,7.45-15.33,17.45-23.13,13.22-6.65-3.61-2.13-16.95,1.14-27.05-9.36,9.53-16.58,19.44-24.11,30.15-1.18,1.68-4.24,3.16-5.83,2.92s-5.13-2.99-4.66-4.68l7.36-25.94-22.92,14.02c8.25,5.7-.1,18.49-10.37,24.31-7.71,4.37-17.38,6.9-22.51,2.06-5.42-5.12,12.1-19.67,22.61-25.03-5.68-2.93-9.99-6.23-10.82-11.35-8.36,9.03-22.33,26.26-29.85,25.8-1.7-.1-4.63-3.35-4.41-5.2l1.57-13.83c-7.2,8.32-18.09,21.67-25.32,18.05-7.68-3.85-2.1-17.21,1.38-28.16-9.13,7.84-15.73,16.94-23.02,26.21l-5.78,7.35c-1.08,1.38-4.82,2-6.27,1.22s-3.13-4.9-2.56-6.58l8.75-25.7-15.14,9.71c-7.6,13.12-17.31,24.49-30.17,32.72-11.91,7.62-23.32,4.72-23.26-1.91.08-8.99,29.81-23.2,41.94-30.49,4.77-7.97,10.63-20.2,5.21-25.09-4.3.38-9.22,2.88-12.78,5.65-12.51,9.72-22.08,21.49-29.52,35.37-.95,1.77-4.14,3.01-5.63,2.49-2.16-.75-3.7-4.16-2.95-6.81,7.31-25.83,17.43-49.95,28.68-74.3,7.55-16.35,14.81-31.7,23.84-47.17,1.41-2.41,4.01-4.42,6.11-4.34,2.81.1,6.97,2.13,6.87,4.45l-7.19,11.79c-15.07,28.98-28.76,57.98-41.26,88.89,10.29-9.9,19.89-21.15,34.12-21.19,5.77-.02,10,3.92,10.47,9.75.38,4.61-1.1,9.27-2.47,14.74l14.22-8.53,14.13-32.64c6.77-15.64,14.43-30.1,23.23-44.66,1.31-2.17,4.13-4.47,6.07-4.64,2.78-.24,6.48,1.64,7.66,3.48l-12.56,19.42c-13.28,25.64-25.01,51.59-35.34,78.47l18.16-19.97c5.74-6.31,14.34-13.86,18.78-10.23,4.86,3.98-8.91,21.51-9.29,36.41,9.08-6.45,16.91-13.73,23-22.45l6.01-12.35c.57-1.18,3.74-1.87,5.02-1.56,1.46.35,4.41,3.01,3.83,4.55-3.8,9.96-8.67,19.45-9.81,30.86,10.09-8.92,19.64-17.73,26.99-28.38,8.96-12.98,24.76-24.47,32.59-11.77-6.61.28-11.48,3.02-16.16,7.01-4.37,3.74-8.4,7.61-8.28,14.1l8.74,6.6,27.52-16.93c8.02-20.69,16.72-40.29,26.25-60.33l10.54-19.73c.92-1.73,4.36-3.21,6.07-3.15,2.03.07,6.33,2.6,5.74,4.46l-13.32,24.42c-12.15,24.99-23.35,49.59-33.18,76.34l17.36-20.31c7.48-8.76,16.79-17.39,21.09-9.3l-9.41,23.02c-1.21,2.95-1.53,6.88-1.43,10.32,7.7-4.47,15.08-10.41,19.37-18.3,4.62-8.5,10.06-15.42,18.41-20.83,4.42-2.86,11.49-3.69,15.2.9,5.12,6.35-11.04,22.9-24.89,25.49-1.47,4.12-2.65,9.56.25,13.27,5.11,6.53,30.38-13.74,37.69-24.02,11.5-30.01,23.4-58.86,37.43-87.49,1.23-2.52,3.76-5.06,5.66-5.15,2.78-.13,6.35,1.48,7.41,4.2-14,27.18-26.37,54.85-36.86,82.79l29.07-21.78c3.23-2.42,8.11-1.41,9.75,2.23-.52,1.75-2.62,3.97-4.6,5.36ZM559.18,264.18c7.98-3.67,13.23-9.45,17.56-17.63-6.02,1.31-13.41,10.6-17.56,17.63ZM308.92,307.15c11.5-2.91,24.12-16.27,29.84-25.88l-22.96,16.05c-3.29,2.3-6.17,5.49-6.88,9.82ZM448.49,299.52c9.97-2.3,22.51-9.75,21.55-18.71l-8.25,4.59c-5.81,3.23-10.6,7.48-13.31,14.12Z"/>
+  <path fill="#ffffff" d="M1110.76,231.59c2.56-5.24,3.6-12.2,9.61-13.78,1.45-.38,4.55.58,5.34,1.65,2.21,3-4.06,7.19-2.3,11.72,1.85,4.76,7.71,4.25,9.09,7.22.55,1.19-.03,4.17-.58,5.47l-6.34,15.02c-.51,1.2.27,3.85,1.05,4.65s3.54.53,4.77.04l35.66-14.37c16.51-5.33,33.8-7.11,50.18-2.31l-22.78.93c-27.36,1.12-54.77,20.21-67.28,20.73-5,.21-9.26-3.26-9.2-8.4.06-6.24,2.07-11.8,4.53-18.13l-7.48-6.47-12.34,13.29c-8.77,9.44-25.45,22.12-31.2,13.04-2.41-3.8-1.4-9.16-.43-13.57-8.37,8.99-22.93,24.28-30.88,18.35-3.65-2.73-3.7-6.98-3.19-11.98l-16.6,13.69c-5.43,4.48-12.78,4.14-19.05.6-5.39-3.05-7.73-8.19-11.3-14.18l-7.92,20.95c-.43,1.14-3.21,1.85-4.13,1.46-1.1-.46-3.42-2.69-3.21-4.08l2.12-14.12c-5.74,6.27-11.77,12.12-19.92,14.88-5,1.69-11.32-.88-11.99-6.3l-1.12-8.93c-8.66,9.39-22.47,22.23-31.5,16.13-3.29-2.23-4.45-6.77-3.14-11.92l-17.01,13.42c-2.46,1.94-6.64,1.72-9.5.13-6.92-3.83-2.67-17.95,1.2-28.72-12.45,10.57-22.82,22.53-32.31,35.74-1.88,2.62-4.54,3.85-6.71,2.87-2.85-1.29-5.1-4.23-4.16-7.3l6.88-22.53c12.2-34.97,27.04-68.33,44.81-100.8,1.15-2.09,4.57-3.4,6.32-3.32,2.2.1,5.18,1.75,6.17,3.96l-12.78,22.99c-15.24,30.24-28.12,60.79-39.87,93.32,9.4-10.93,35.54-41.39,43.13-39,1.45.46,3.7,2.9,4.37,4.6l-8.4,18.04c-2.49,5.34-4.8,10.68-3.53,16.95,10-5.71,17.86-12.6,24.29-21.05,5.99-7.87,12.34-15.3,21.51-19.44,5.94-2.69,13.82-4.85,19.2-1l3.27,2.33c.86.61,2.75-1.12,4.03-2.33,1.81-1.69,6.83,1.94,6.16,4.17l-8.75,16.68c-2.92,5.57-5.83,10.46-4.71,17.43,8.23-.15,25.06-16.14,27.95-22.09,15.14-31.15,31.29-61.1,52.02-88.81,3.52-4.71,9.64-6.22,13.84-1.86-15.69,19.56-28.66,39.73-39.73,61.67l-13.46,26.68,31.04-24.15c2.25-1.75,7.43-1.61,8.95.46.79,1.08-.3,4.44-1.36,5.21l-33.55,24.51,3.68,8.83c.98,2.35,3.98,5.02,6.06,5.7,8.6,2.8,27.72-13.86,30.76-20.8l8.61-19.65c1.62-3.7,9.07-2.54,10.39,1.18l-9.71,22.47c-2,4.64-3.41,8.78-3.27,14.48,8.3-4.55,14.53-9.85,20.01-16.73l11.09-13.91c1.85-2.32,3.99-4.8,6.6-6.59,1.37-.94,5.13.45,5.82,1.84,2.25,4.58-10.81,16.96-11.37,32.09,7.43-1.22,13.01-5.97,18.17-11.15s11.81-10.53,15.38-17.83ZM923.88,269.33c9.38-7.7,30.59-27.35,26.32-32.68-6.38-7.99-32.46,16.31-33.58,34.16,1.51.75,5.44.01,7.26-1.48Z"/>
+  <path fill="#ffffff" d="M122.69,320.99c-6.05,9.5-15.05,24.11-14.23,32.99-2.39,1.9-8.31.1-9.7-2.88,1.83-10.69,6.7-19.65,12.09-28.99,12.04-20.84,27.14-38.89,42.44-57.57l-36.14,12.08c-17.07,5.71-51.19,20.45-62.6,33.56,1.34,1.77,3.82,3.18,5.68,3.43l13.87,1.9c-8.93,3.47-26.9,1.71-28.8-4.33-1.65-5.27,13.97-15.2,22.81-19.81,28.98-15.13,59.27-25.47,91.07-33.56l37.44-43.73c23.75-27.74,47.89-54.19,74.49-79.19,12.41-11.67,24.74-22.07,39.03-30.98,8.1-5.05,17.61-7.76,23.29-1.43,1.49,1.66,2.12,6.39,1.14,8.56l-12.22,27.13c-15.82,32.01-29.78,64.21-42.27,98.07,7.66.19,13.9-1.23,21.36,1.72l-23.04,2.76c-8.54,24.53-34.47,99.67-.59,97.69,8.58-.5,15.99-4.32,24.73-8.15-11.88,13.02-35.89,17.73-47.28,2.36-5.6-9.74-6.2-20.28-4.86-31.54,2.48-20.89,8.37-40.65,15.11-59.85-34.38,4.21-66.11,11.12-98.23,20.32-16.18,19.34-31.2,38.4-44.6,59.42ZM267,236.52l16.62-41.33c9.97-24.81,21.22-48.33,34.07-71.71,3.68-6.56,6.45-12.26,9.04-19.83-4.55.27-7.74,1.54-11.02,3.94-19.61,14.35-37.23,30-54.24,47.61-25.09,25.95-48.23,52.67-71.57,80.11l-16.54,19.17c31.39-8.83,61.78-13.93,93.64-17.94Z"/>
+  <path fill="#ffffff" d="M789.92,312.41l-122.95,13.39c-70.83,9.12-140.91,19.03-211.29,31.45l-177.96,34.34c-6.95,1.34-13.09,2.6-20.54,1.79,24.31-7.46,48.49-12.93,73.68-18.26,105.45-22.34,211.2-39.73,318.25-53.32l142.18-15.01c8.67-33.16,19.77-64.97,32.66-96.77l28.95-64.8c1.86-2.15,4.07-4.59,5.95-4.95,2.8-.52,6.03,1.67,7.39,4.42l-16.8,34.97c-17.7,41.36-33.43,82.93-46.88,125.96,54.1-3.91,106.72-7.73,160.63-8.33,39.07-.43,77.3-1.62,116.48,3.54-93.53.03-185.73,1.89-279.12,10.8l-7.51,23.28c-.51,1.57-1.94,3.57-3.15,3.59-1.48.02-4.53-2.62-4.2-4.31l4.24-21.78Z"/>
+  <path fill="#ffffff" d="M679.73,182.81c-1.99,4.25,20.13,6.9,32.06,6.94-12.86,4.08-26.26,3.2-38.66-1.94l-3.23-4.35c-3.32-4.47,20.95-17.09,31.48-21.15l23.79-9.19c105.9-36.2,231.06-51.95,342.43-44.34,14.98,1.02,29.12,2.49,43.04,7.49l-61.85-4.36c-97.45-2.19-194.19,10.01-287.93,36.77-19.13,5.46-76.02,23.21-81.13,34.13Z"/>
+  <path fill="#ffffff" d="M445.08,238.51c-1.69,1.83-4.78,2.83-6.4,2.13-2.35-1.03-3.97-4.46-2.8-7.07,1.81-4.02,6.08-6.72,10.73-6.4,1,.07,3.05,1.23,3.55,2.05s.24,3.5-.42,4.22l-4.67,5.07Z"/>
+</svg>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="resume.html">Resume</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-sun" id="sunBtn">☀</button>
+    <a href="mailto:thakur.abhishek95@gmail.com?subject=Project%20Inquiry" class="btn-talk">LET'S TALK</a>
+  </div>
+  <button class="ham" id="ham" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+</div>
+</nav>
+
+<!-- ════════ HERO ════════ -->
+<section id="sv-hero">
+  <div class="sv-hero-gl"></div><div class="sv-hero-gr"></div>
+  <div class="sv-stars" id="sv-stars-el"></div>
+  <div class="sv-hero-inner">
+    <div class="sv-h-pill" id="sv-pill">Services</div>
+    <h1 class="sv-h1" id="sv-h1">
+      <span class="sv-hline"><span class="sv-hline-in">How I Help</span></span>
+      <span class="sv-hline"><span class="sv-hline-in">Brands Grow</span></span>
+    </h1>
+    <p class="sv-h-sub" id="sv-sub">I partner with organizations to create impactful brand, marketing, and digital experiences that connect creativity, technology, and business goals.</p>
+    <div class="sv-h-btns" id="sv-btns">
+      <a href="work.html" class="btn-primary-sv">View My Work</a>
+      <a href="https://in.linkedin.com/in/abhishek-thakur-80a6a4160" class="btn-sec-sv" target="_blank" rel="noopener noreferrer"><span class="blink-dot"></span>Let's Connect</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE QUICK NAV -->
+<nav id="sv-nav-strip" aria-label="Services navigation">
+  <a href="#sv01" class="svns-item"><span class="svns-num">01</span>Brand Identity</a>
+  <a href="#sv02" class="svns-item"><span class="svns-num">02</span>Marketing Design</a>
+  <a href="#sv03" class="svns-item"><span class="svns-num">03</span>Motion &amp; AI</a>
+  <a href="#sv-process" class="svns-item"><span class="svns-num">↓</span>Process</a>
+</nav>
+
+<!-- ════════ SERVICES ════════ -->
+<section class="sv-section" id="sv01" data-color="var(--hot-pink)">
+  <div class="sv-inner">
+    <!-- Left meta column -->
+    <div class="sv-meta">
+      <div class="sv-tag jr" style="border-color:var(--hot-pink);color:var(--hot-pink)">Service 01</div>
+      <div class="sv-num-big" style="color:var(--hot-pink)">01</div>
+      <div class="sv-best-card jr" style="border-left-color:var(--hot-pink)">
+        <p class="sv-best-lbl">Best For</p>
+        <p class="sv-best-txt">Organizations launching, refreshing, or scaling their brand presence.</p>
+      </div>
+    </div>
+    <!-- Right content column -->
+    <div class="sv-content">
+      <h2 class="sv-title jr">Brand Identity &amp; Visual Design</h2>
+      <p class="sv-desc jr" style="transition-delay:.1s">From logos and visual systems to campaign branding and creative direction, I help organizations build brands that are recognizable, consistent, and built to grow.</p>
+      <div class="sv-divider jr" style="transition-delay:.18s;background:var(--hot-pink)"></div>
+      <p class="sv-inc-lbl jr" style="transition-delay:.22s;color:var(--hot-pink)">What's Included</p>
+      <ul class="sv-bullets jr" style="transition-delay:.28s">
+        <li class="sv-bullet jr" style="transition-delay:0.00s"><span class="sv-bullet-dot" style="background:var(--hot-pink)"></span>Logo Design</li><li class="sv-bullet jr" style="transition-delay:0.00s"><span class="sv-bullet-dot" style="background:var(--hot-pink)"></span>Brand Identity Design</li><li class="sv-bullet jr" style="transition-delay:0.06s"><span class="sv-bullet-dot" style="background:var(--hot-pink)"></span>Visual Identity Systems</li><li class="sv-bullet jr" style="transition-delay:0.06s"><span class="sv-bullet-dot" style="background:var(--hot-pink)"></span>Brand Guidelines</li><li class="sv-bullet jr" style="transition-delay:0.12s"><span class="sv-bullet-dot" style="background:var(--hot-pink)"></span>Typography Systems</li><li class="sv-bullet jr" style="transition-delay:0.12s"><span class="sv-bullet-dot" style="background:var(--hot-pink)"></span>Color Systems</li><li class="sv-bullet jr" style="transition-delay:0.18s"><span class="sv-bullet-dot" style="background:var(--hot-pink)"></span>Campaign Branding</li><li class="sv-bullet jr" style="transition-delay:0.18s"><span class="sv-bullet-dot" style="background:var(--hot-pink)"></span>Event Branding</li><li class="sv-bullet jr" style="transition-delay:0.24s"><span class="sv-bullet-dot" style="background:var(--hot-pink)"></span>Creative Direction</li><li class="sv-bullet jr" style="transition-delay:0.24s"><span class="sv-bullet-dot" style="background:var(--hot-pink)"></span>Art Direction</li>
+      </ul>
+      
+    </div>
+  </div>
+  <!-- Background accent glow -->
+  <div class="sv-glow" style="background:radial-gradient(circle,rgba(240,25,90,.28) 0%,transparent 70%)"></div>
+</section>
+<section class="sv-section sv-alt" id="sv02" data-color="var(--cobalt)">
+  <div class="sv-inner">
+    <!-- Left meta column -->
+    <div class="sv-meta">
+      <div class="sv-tag jr" style="border-color:var(--cobalt);color:var(--cobalt)">Service 02</div>
+      <div class="sv-num-big" style="color:var(--cobalt)">02</div>
+      <div class="sv-best-card jr" style="border-left-color:var(--cobalt)">
+        <p class="sv-best-lbl">Best For</p>
+        <p class="sv-best-txt">Marketing teams seeking scalable, enterprise-ready creative support.</p>
+      </div>
+    </div>
+    <!-- Right content column -->
+    <div class="sv-content">
+      <h2 class="sv-title jr">Marketing &amp; Communication Design</h2>
+      <p class="sv-desc jr" style="transition-delay:.1s">Creating strategic marketing assets, thought-leadership content, campaign creatives, and digital experiences that help organizations communicate clearly, engage audiences, and drive business growth.</p>
+      <div class="sv-divider jr" style="transition-delay:.18s;background:var(--cobalt)"></div>
+      <p class="sv-inc-lbl jr" style="transition-delay:.22s;color:var(--cobalt)">What's Included</p>
+      <ul class="sv-bullets jr" style="transition-delay:.28s">
+        <li class="sv-bullet jr" style="transition-delay:0.00s"><span class="sv-bullet-dot" style="background:var(--cobalt)"></span>Campaign Creatives</li><li class="sv-bullet jr" style="transition-delay:0.00s"><span class="sv-bullet-dot" style="background:var(--cobalt)"></span>Web Banners</li><li class="sv-bullet jr" style="transition-delay:0.06s"><span class="sv-bullet-dot" style="background:var(--cobalt)"></span>Social Media Design</li><li class="sv-bullet jr" style="transition-delay:0.06s"><span class="sv-bullet-dot" style="background:var(--cobalt)"></span>Email Marketing Assets</li><li class="sv-bullet jr" style="transition-delay:0.12s"><span class="sv-bullet-dot" style="background:var(--cobalt)"></span>Whitepapers &amp; eBooks</li><li class="sv-bullet jr" style="transition-delay:0.12s"><span class="sv-bullet-dot" style="background:var(--cobalt)"></span>Infographics</li><li class="sv-bullet jr" style="transition-delay:0.18s"><span class="sv-bullet-dot" style="background:var(--cobalt)"></span>Presentation Design</li><li class="sv-bullet jr" style="transition-delay:0.18s"><span class="sv-bullet-dot" style="background:var(--cobalt)"></span>Case Studies</li><li class="sv-bullet jr" style="transition-delay:0.24s"><span class="sv-bullet-dot" style="background:var(--cobalt)"></span>Landing Page Visuals</li><li class="sv-bullet jr" style="transition-delay:0.24s"><span class="sv-bullet-dot" style="background:var(--cobalt)"></span>Sales Enablement Materials</li>
+      </ul>
+      
+    </div>
+  </div>
+  <!-- Background accent glow -->
+  <div class="sv-glow" style="background:radial-gradient(circle,rgba(61,94,224,.3) 0%,transparent 70%)"></div>
+</section>
+<section class="sv-section" id="sv03" data-color="var(--violet)">
+  <div class="sv-inner">
+    <!-- Left meta column -->
+    <div class="sv-meta">
+      <div class="sv-tag jr" style="border-color:var(--violet);color:var(--violet)">Service 03</div>
+      <div class="sv-num-big" style="color:var(--violet)">03</div>
+      <div class="sv-best-card jr" style="border-left-color:var(--violet)">
+        <p class="sv-best-lbl">Best For</p>
+        <p class="sv-best-txt">Organizations looking to scale content production without scaling complexity.</p>
+      </div>
+    </div>
+    <!-- Right content column -->
+    <div class="sv-content">
+      <h2 class="sv-title jr">Motion Graphics, Video &amp; AI-Powered Creative Production</h2>
+      <p class="sv-desc jr" style="transition-delay:.1s">Creating engaging motion content, video experiences, and AI-enhanced production workflows that help teams produce more content, maintain consistency, and move faster without sacrificing quality.</p>
+      <div class="sv-divider jr" style="transition-delay:.18s;background:var(--violet)"></div>
+      <p class="sv-inc-lbl jr" style="transition-delay:.22s;color:var(--violet)">What's Included</p>
+      <ul class="sv-bullets jr" style="transition-delay:.28s">
+        <li class="sv-bullet jr" style="transition-delay:0.00s"><span class="sv-bullet-dot" style="background:var(--violet)"></span>Motion Graphics</li><li class="sv-bullet jr" style="transition-delay:0.00s"><span class="sv-bullet-dot" style="background:var(--violet)"></span>Corporate Videos</li><li class="sv-bullet jr" style="transition-delay:0.06s"><span class="sv-bullet-dot" style="background:var(--violet)"></span>Explainer Videos</li><li class="sv-bullet jr" style="transition-delay:0.06s"><span class="sv-bullet-dot" style="background:var(--violet)"></span>Product Videos</li><li class="sv-bullet jr" style="transition-delay:0.12s"><span class="sv-bullet-dot" style="background:var(--violet)"></span>Marketing Videos</li><li class="sv-bullet jr" style="transition-delay:0.12s"><span class="sv-bullet-dot" style="background:var(--violet)"></span>Creative Automation</li><li class="sv-bullet jr" style="transition-delay:0.18s"><span class="sv-bullet-dot" style="background:var(--violet)"></span>Presentation Videos</li><li class="sv-bullet jr" style="transition-delay:0.18s"><span class="sv-bullet-dot" style="background:var(--violet)"></span>AI Workflow Integration</li><li class="sv-bullet jr" style="transition-delay:0.24s"><span class="sv-bullet-dot" style="background:var(--violet)"></span>Animated Social Content</li><li class="sv-bullet jr" style="transition-delay:0.24s"><span class="sv-bullet-dot" style="background:var(--violet)"></span>Content Repurposing Systems</li>
+      </ul>
+
+    </div>
+  </div>
+  <!-- Background accent glow -->
+  <div class="sv-glow" style="background:radial-gradient(circle,rgba(109,40,217,.3) 0%,transparent 70%)"></div>
+</section>
+
+<!-- ════════ PROCESS ════════ -->
+<section id="sv-process">
+  <div class="sv-process-head">
+    <div class="sv-sec-pill jr">Process</div>
+    <h2 class="sv-sec-h jr" style="transition-delay:.1s">From Idea to Impact</h2>
+    <p class="jr" style="transition-delay:.18s;font-size:17px;font-weight:500;color:rgba(255,255,255,.62);max-width:580px;margin:16px auto 0;line-height:1.68">Every project is different, but the goal remains the same: creating meaningful experiences that balance creativity, technology, and business impact.</p>
+  </div>
+  <div class="sv-steps">
+  <div class="sv-step jr" style="transition-delay:0.0s">
+    <div class="sv-step-num">01</div>
+    <h3 class="sv-step-title">Discover &amp; Understand</h3>
+    <p class="sv-step-desc">Understanding the challenge before designing the solution. I start by learning about business goals, audience needs, project requirements, existing challenges, and success metrics to create a strong foundation for the work ahead.</p>
+  </div>
+  <div class="sv-step jr" style="transition-delay:0.1s">
+    <div class="sv-step-num">02</div>
+    <h3 class="sv-step-title">Strategy &amp; Direction</h3>
+    <p class="sv-step-desc">Turning insights into a clear creative roadmap. Together, we define priorities, creative direction, messaging, workflows, timelines, and the most effective approach to achieve project goals.</p>
+  </div>
+  <div class="sv-step jr" style="transition-delay:0.2s">
+    <div class="sv-step-num">03</div>
+    <h3 class="sv-step-title">Design &amp; Create</h3>
+    <p class="sv-step-desc">Transforming ideas into impactful experiences. This is where concepts become reality through branding, marketing assets, websites, presentations, motion content, and AI-enhanced creative workflows.</p>
+  </div>
+  <div class="sv-step jr" style="transition-delay:0.3s">
+    <div class="sv-step-num">04</div>
+    <h3 class="sv-step-title">Refine &amp; Deliver</h3>
+    <p class="sv-step-desc">Optimizing, improving, and preparing for launch. Every deliverable is reviewed, refined, and tested to ensure consistency, quality, usability, and alignment with business objectives before final delivery.</p>
+  </div>
+  </div>
+</section>
+
+<!-- ════════ FAQ ════════ -->
+<section id="sv-faq">
+  <div class="sv-faq-inner">
+    <div class="sv-faq-head">
+      <div class="sv-faq-pill jr">FAQ</div>
+      <h2 class="sv-faq-h jr" style="transition-delay:.1s">Common Questions</h2>
+    </div>
+    <div id="faq-list">
+  <div class="faq-item jr" style="transition-delay:0.00s">
+    <button class="faq-q" aria-expanded="false">
+      <span>What types of projects do you typically work on?</span>
+      <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+    </button>
+    <div class="faq-body" style="height:0;overflow:hidden">
+      <p class="faq-a">I work across branding, marketing design, websites, landing pages, presentations, multimedia content, motion graphics, and AI-powered creative initiatives. Projects range from individual campaigns to long-term creative support and design leadership.</p>
+    </div>
+  </div>
+  <div class="faq-item jr" style="transition-delay:0.07s">
+    <button class="faq-q" aria-expanded="false">
+      <span>Do you work with internal marketing teams?</span>
+      <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+    </button>
+    <div class="faq-body" style="height:0;overflow:hidden">
+      <p class="faq-a">Yes. Much of my experience comes from collaborating with enterprise marketing teams, stakeholders, and cross-functional departments to deliver campaigns, thought-leadership content, digital experiences, and brand initiatives.</p>
+    </div>
+  </div>
+  <div class="faq-item jr" style="transition-delay:0.14s">
+    <button class="faq-q" aria-expanded="false">
+      <span>Can you support ongoing creative requirements?</span>
+      <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+    </button>
+    <div class="faq-body" style="height:0;overflow:hidden">
+      <p class="faq-a">Absolutely. In addition to project-based work, I help organizations establish scalable design systems, streamline creative workflows, and support recurring marketing and communication needs.</p>
+    </div>
+  </div>
+  <div class="faq-item jr" style="transition-delay:0.21s">
+    <button class="faq-q" aria-expanded="false">
+      <span>How do you use AI in your creative process?</span>
+      <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+    </button>
+    <div class="faq-body" style="height:0;overflow:hidden">
+      <p class="faq-a">I use AI as a creative accelerator for research, ideation, content exploration, workflow automation, and production efficiency while ensuring that strategy, creativity, and final quality remain human-led.</p>
+    </div>
+  </div>
+  <div class="faq-item jr" style="transition-delay:0.28s">
+    <button class="faq-q" aria-expanded="false">
+      <span>What is it like working with you?</span>
+      <span class="faq-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg></span>
+    </button>
+    <div class="faq-body" style="height:0;overflow:hidden">
+      <p class="faq-a">My approach combines strategic thinking, creative problem-solving, and collaborative execution. Every project begins with understanding business goals and ends with delivering work that is both visually engaging and aligned with measurable outcomes.</p>
+    </div>
+  </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CTA ════════ -->
+<section id="sv-cta">
+  <div class="sv-cta-b1"></div><div class="sv-cta-b2"></div>
+  <h2 class="sv-cta-h jr">Let's Build Something Meaningful.</h2>
+  <p class="sv-cta-p jr" style="transition-delay:.14s">Whether you're launching a campaign, building a brand, scaling creative production, or exploring AI-powered workflows, I'd love to help bring your vision to life.</p>
+  <a href="mailto:thakur.abhishek95@gmail.com?subject=Project%20Inquiry" class="btn-cta jr" style="transition-delay:.28s">LET'S TALK</a>
+</section>
+
+<!-- ════════ FOOTER ════════ -->
+<footer>
+  <div class="ft-inner">
+    <!-- LEFT: logo + tagline -->
+    <div class="ft-col">
+      <a href="index.html" class="ft-logo" aria-label="Abhishek Thakur home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 498.31" role="img" aria-label="Abhishek Thakur" id="logo-footer-sv" style="display:block;width:100%;height:auto">
+  <path fill="#ffffff" d="M643.65,237.94l-29.43,20.78c6.33,13.13,20.04,25.09,34.1,23.13,28.11-3.93,58.58-21.25,87.88-22.92l-63.14,21.85-21.6,5.61c-9.59,2.49-20.18-.28-28.32-5.82-7.12-4.84-11.75-11.23-17.35-18.47l-7.64,23.77c-.39,1.21-3.81,1.89-4.96,1.43-1.35-.53-3.26-3.39-2.97-4.87l3.03-15.45c-11.34,10.46-27.49,25.99-40.24,18.83-4.7-2.64-6.25-7.12-5.58-13.14-7.65,7.45-15.33,17.45-23.13,13.22-6.65-3.61-2.13-16.95,1.14-27.05-9.36,9.53-16.58,19.44-24.11,30.15-1.18,1.68-4.24,3.16-5.83,2.92s-5.13-2.99-4.66-4.68l7.36-25.94-22.92,14.02c8.25,5.7-.1,18.49-10.37,24.31-7.71,4.37-17.38,6.9-22.51,2.06-5.42-5.12,12.1-19.67,22.61-25.03-5.68-2.93-9.99-6.23-10.82-11.35-8.36,9.03-22.33,26.26-29.85,25.8-1.7-.1-4.63-3.35-4.41-5.2l1.57-13.83c-7.2,8.32-18.09,21.67-25.32,18.05-7.68-3.85-2.1-17.21,1.38-28.16-9.13,7.84-15.73,16.94-23.02,26.21l-5.78,7.35c-1.08,1.38-4.82,2-6.27,1.22s-3.13-4.9-2.56-6.58l8.75-25.7-15.14,9.71c-7.6,13.12-17.31,24.49-30.17,32.72-11.91,7.62-23.32,4.72-23.26-1.91.08-8.99,29.81-23.2,41.94-30.49,4.77-7.97,10.63-20.2,5.21-25.09-4.3.38-9.22,2.88-12.78,5.65-12.51,9.72-22.08,21.49-29.52,35.37-.95,1.77-4.14,3.01-5.63,2.49-2.16-.75-3.7-4.16-2.95-6.81,7.31-25.83,17.43-49.95,28.68-74.3,7.55-16.35,14.81-31.7,23.84-47.17,1.41-2.41,4.01-4.42,6.11-4.34,2.81.1,6.97,2.13,6.87,4.45l-7.19,11.79c-15.07,28.98-28.76,57.98-41.26,88.89,10.29-9.9,19.89-21.15,34.12-21.19,5.77-.02,10,3.92,10.47,9.75.38,4.61-1.1,9.27-2.47,14.74l14.22-8.53,14.13-32.64c6.77-15.64,14.43-30.1,23.23-44.66,1.31-2.17,4.13-4.47,6.07-4.64,2.78-.24,6.48,1.64,7.66,3.48l-12.56,19.42c-13.28,25.64-25.01,51.59-35.34,78.47l18.16-19.97c5.74-6.31,14.34-13.86,18.78-10.23,4.86,3.98-8.91,21.51-9.29,36.41,9.08-6.45,16.91-13.73,23-22.45l6.01-12.35c.57-1.18,3.74-1.87,5.02-1.56,1.46.35,4.41,3.01,3.83,4.55-3.8,9.96-8.67,19.45-9.81,30.86,10.09-8.92,19.64-17.73,26.99-28.38,8.96-12.98,24.76-24.47,32.59-11.77-6.61.28-11.48,3.02-16.16,7.01-4.37,3.74-8.4,7.61-8.28,14.1l8.74,6.6,27.52-16.93c8.02-20.69,16.72-40.29,26.25-60.33l10.54-19.73c.92-1.73,4.36-3.21,6.07-3.15,2.03.07,6.33,2.6,5.74,4.46l-13.32,24.42c-12.15,24.99-23.35,49.59-33.18,76.34l17.36-20.31c7.48-8.76,16.79-17.39,21.09-9.3l-9.41,23.02c-1.21,2.95-1.53,6.88-1.43,10.32,7.7-4.47,15.08-10.41,19.37-18.3,4.62-8.5,10.06-15.42,18.41-20.83,4.42-2.86,11.49-3.69,15.2.9,5.12,6.35-11.04,22.9-24.89,25.49-1.47,4.12-2.65,9.56.25,13.27,5.11,6.53,30.38-13.74,37.69-24.02,11.5-30.01,23.4-58.86,37.43-87.49,1.23-2.52,3.76-5.06,5.66-5.15,2.78-.13,6.35,1.48,7.41,4.2-14,27.18-26.37,54.85-36.86,82.79l29.07-21.78c3.23-2.42,8.11-1.41,9.75,2.23-.52,1.75-2.62,3.97-4.6,5.36ZM559.18,264.18c7.98-3.67,13.23-9.45,17.56-17.63-6.02,1.31-13.41,10.6-17.56,17.63ZM308.92,307.15c11.5-2.91,24.12-16.27,29.84-25.88l-22.96,16.05c-3.29,2.3-6.17,5.49-6.88,9.82ZM448.49,299.52c9.97-2.3,22.51-9.75,21.55-18.71l-8.25,4.59c-5.81,3.23-10.6,7.48-13.31,14.12Z"/>
+  <path fill="#ffffff" d="M1110.76,231.59c2.56-5.24,3.6-12.2,9.61-13.78,1.45-.38,4.55.58,5.34,1.65,2.21,3-4.06,7.19-2.3,11.72,1.85,4.76,7.71,4.25,9.09,7.22.55,1.19-.03,4.17-.58,5.47l-6.34,15.02c-.51,1.2.27,3.85,1.05,4.65s3.54.53,4.77.04l35.66-14.37c16.51-5.33,33.8-7.11,50.18-2.31l-22.78.93c-27.36,1.12-54.77,20.21-67.28,20.73-5,.21-9.26-3.26-9.2-8.4.06-6.24,2.07-11.8,4.53-18.13l-7.48-6.47-12.34,13.29c-8.77,9.44-25.45,22.12-31.2,13.04-2.41-3.8-1.4-9.16-.43-13.57-8.37,8.99-22.93,24.28-30.88,18.35-3.65-2.73-3.7-6.98-3.19-11.98l-16.6,13.69c-5.43,4.48-12.78,4.14-19.05.6-5.39-3.05-7.73-8.19-11.3-14.18l-7.92,20.95c-.43,1.14-3.21,1.85-4.13,1.46-1.1-.46-3.42-2.69-3.21-4.08l2.12-14.12c-5.74,6.27-11.77,12.12-19.92,14.88-5,1.69-11.32-.88-11.99-6.3l-1.12-8.93c-8.66,9.39-22.47,22.23-31.5,16.13-3.29-2.23-4.45-6.77-3.14-11.92l-17.01,13.42c-2.46,1.94-6.64,1.72-9.5.13-6.92-3.83-2.67-17.95,1.2-28.72-12.45,10.57-22.82,22.53-32.31,35.74-1.88,2.62-4.54,3.85-6.71,2.87-2.85-1.29-5.1-4.23-4.16-7.3l6.88-22.53c12.2-34.97,27.04-68.33,44.81-100.8,1.15-2.09,4.57-3.4,6.32-3.32,2.2.1,5.18,1.75,6.17,3.96l-12.78,22.99c-15.24,30.24-28.12,60.79-39.87,93.32,9.4-10.93,35.54-41.39,43.13-39,1.45.46,3.7,2.9,4.37,4.6l-8.4,18.04c-2.49,5.34-4.8,10.68-3.53,16.95,10-5.71,17.86-12.6,24.29-21.05,5.99-7.87,12.34-15.3,21.51-19.44,5.94-2.69,13.82-4.85,19.2-1l3.27,2.33c.86.61,2.75-1.12,4.03-2.33,1.81-1.69,6.83,1.94,6.16,4.17l-8.75,16.68c-2.92,5.57-5.83,10.46-4.71,17.43,8.23-.15,25.06-16.14,27.95-22.09,15.14-31.15,31.29-61.1,52.02-88.81,3.52-4.71,9.64-6.22,13.84-1.86-15.69,19.56-28.66,39.73-39.73,61.67l-13.46,26.68,31.04-24.15c2.25-1.75,7.43-1.61,8.95.46.79,1.08-.3,4.44-1.36,5.21l-33.55,24.51,3.68,8.83c.98,2.35,3.98,5.02,6.06,5.7,8.6,2.8,27.72-13.86,30.76-20.8l8.61-19.65c1.62-3.7,9.07-2.54,10.39,1.18l-9.71,22.47c-2,4.64-3.41,8.78-3.27,14.48,8.3-4.55,14.53-9.85,20.01-16.73l11.09-13.91c1.85-2.32,3.99-4.8,6.6-6.59,1.37-.94,5.13.45,5.82,1.84,2.25,4.58-10.81,16.96-11.37,32.09,7.43-1.22,13.01-5.97,18.17-11.15s11.81-10.53,15.38-17.83ZM923.88,269.33c9.38-7.7,30.59-27.35,26.32-32.68-6.38-7.99-32.46,16.31-33.58,34.16,1.51.75,5.44.01,7.26-1.48Z"/>
+  <path fill="#ffffff" d="M122.69,320.99c-6.05,9.5-15.05,24.11-14.23,32.99-2.39,1.9-8.31.1-9.7-2.88,1.83-10.69,6.7-19.65,12.09-28.99,12.04-20.84,27.14-38.89,42.44-57.57l-36.14,12.08c-17.07,5.71-51.19,20.45-62.6,33.56,1.34,1.77,3.82,3.18,5.68,3.43l13.87,1.9c-8.93,3.47-26.9,1.71-28.8-4.33-1.65-5.27,13.97-15.2,22.81-19.81,28.98-15.13,59.27-25.47,91.07-33.56l37.44-43.73c23.75-27.74,47.89-54.19,74.49-79.19,12.41-11.67,24.74-22.07,39.03-30.98,8.1-5.05,17.61-7.76,23.29-1.43,1.49,1.66,2.12,6.39,1.14,8.56l-12.22,27.13c-15.82,32.01-29.78,64.21-42.27,98.07,7.66.19,13.9-1.23,21.36,1.72l-23.04,2.76c-8.54,24.53-34.47,99.67-.59,97.69,8.58-.5,15.99-4.32,24.73-8.15-11.88,13.02-35.89,17.73-47.28,2.36-5.6-9.74-6.2-20.28-4.86-31.54,2.48-20.89,8.37-40.65,15.11-59.85-34.38,4.21-66.11,11.12-98.23,20.32-16.18,19.34-31.2,38.4-44.6,59.42ZM267,236.52l16.62-41.33c9.97-24.81,21.22-48.33,34.07-71.71,3.68-6.56,6.45-12.26,9.04-19.83-4.55.27-7.74,1.54-11.02,3.94-19.61,14.35-37.23,30-54.24,47.61-25.09,25.95-48.23,52.67-71.57,80.11l-16.54,19.17c31.39-8.83,61.78-13.93,93.64-17.94Z"/>
+  <path fill="#ffffff" d="M789.92,312.41l-122.95,13.39c-70.83,9.12-140.91,19.03-211.29,31.45l-177.96,34.34c-6.95,1.34-13.09,2.6-20.54,1.79,24.31-7.46,48.49-12.93,73.68-18.26,105.45-22.34,211.2-39.73,318.25-53.32l142.18-15.01c8.67-33.16,19.77-64.97,32.66-96.77l28.95-64.8c1.86-2.15,4.07-4.59,5.95-4.95,2.8-.52,6.03,1.67,7.39,4.42l-16.8,34.97c-17.7,41.36-33.43,82.93-46.88,125.96,54.1-3.91,106.72-7.73,160.63-8.33,39.07-.43,77.3-1.62,116.48,3.54-93.53.03-185.73,1.89-279.12,10.8l-7.51,23.28c-.51,1.57-1.94,3.57-3.15,3.59-1.48.02-4.53-2.62-4.2-4.31l4.24-21.78Z"/>
+  <path fill="#ffffff" d="M679.73,182.81c-1.99,4.25,20.13,6.9,32.06,6.94-12.86,4.08-26.26,3.2-38.66-1.94l-3.23-4.35c-3.32-4.47,20.95-17.09,31.48-21.15l23.79-9.19c105.9-36.2,231.06-51.95,342.43-44.34,14.98,1.02,29.12,2.49,43.04,7.49l-61.85-4.36c-97.45-2.19-194.19,10.01-287.93,36.77-19.13,5.46-76.02,23.21-81.13,34.13Z"/>
+  <path fill="#ffffff" d="M445.08,238.51c-1.69,1.83-4.78,2.83-6.4,2.13-2.35-1.03-3.97-4.46-2.8-7.07,1.81-4.02,6.08-6.72,10.73-6.4,1,.07,3.05,1.23,3.55,2.05s.24,3.5-.42,4.22l-4.67,5.07Z"/>
+</svg>
+  </a>
+      <p class="ft-tagline">Design Lead<br><span style="font-weight:500;opacity:.75">Brand, Marketing &amp; Digital Experiences</span><br>Pune, India</p>
+    </div>
+    <!-- CENTER: nav -->
+    <div class="ft-col ft-col-mid">
+      <nav class="ft-nav">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="work.html">Work</a>
+    <a href="about.html">About</a>
+    <a href="resume.html">Resume</a>
+  </nav>
+    </div>
+    <!-- RIGHT: whatsapp + socials -->
+    <div class="ft-col ft-col-right">
+      <div class="ft-wa-wrap">
+    <p class="ft-wa-label">Available for Collaboration</p>
+    <a href="https://wa.me/917507382220" class="ft-wa" target="_blank" rel="noopener noreferrer" aria-label="Message on WhatsApp">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Message Me on WhatsApp
+    </a>
+  </div>
+      <div class="ft-socials">
+    <a href="https://in.linkedin.com/in/abhishek-thakur-80a6a4160" class="ft-soc" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/abhishekthakur95?igsh=cnQzZTFyMTNwbWo2" class="ft-soc" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+    </a>
+    <a href="https://www.facebook.com/share/1EKxhmH4Yu/" class="ft-soc" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+    </a>
+    <a href="https://youtube.com/@abhishekthakur9484?si=KBgFyaOaV3OPoa1v" class="ft-soc" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+    </a>
+  </div>
+    </div>
+  </div>
+  <div class="ft-rec">
+    <span class="ft-rec-label">Creative Network</span>
+    <span class="ft-rec-sep">·</span>
+    <a href="https://anirudhx3.wixsite.com/portfolio" class="ft-rec-link" target="_blank" rel="noopener noreferrer">3D &amp; CGI by Anirudh Thakur →</a>
+    <span class="ft-rec-sep" style="margin-left:8px">·</span>
+    <a href="creative-lab.html" class="ft-rec-link" style="margin-left:2px">Creative Lab ↗</a>
+  </div>
+  <div class="ft-bot">
+    <p class="ft-copy">© 2026 Abhishek Thakur</p>
+    <p class="ft-ai">Crafted with AI tools — because this is how modern design works.</p>
+  </div>
+</footer>
+
+<script>
+// ── LOADER — CDN-safe: runs first, before GSAP ──
+(function(){
+  var p=0;
+  var _b=document.getElementById('lbar'),_p=document.getElementById('lpct');
+  var lt=setInterval(function(){
+    p+=Math.random()*14+5;if(p>100)p=100;
+    if(_b)_b.style.width=p+'%';
+    if(_p)_p.textContent=Math.round(p)+'%';
+    if(p>=100){
+      clearInterval(lt);
+      setTimeout(function(){
+        var ldr=document.getElementById('loader');
+        if(ldr)ldr.classList.add('out');
+        setTimeout(function(){
+          if(ldr)ldr.style.display='none';
+          if(typeof startPage==='function')startPage();
+        },900);
+      },280);
+    }
+  },75);
+})();
+if(typeof gsap!=='undefined'){gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);}
+
+// ── STARS ──
+(function(){
+  const c=document.getElementById('sv-stars-el');
+  for(let i=0;i<52;i++){
+    const s=document.createElement('div');s.className='star';
+    const z=Math.random()*2+.5;
+    s.style.cssText=`width:${z}px;height:${z}px;left:${Math.random()*100}%;top:${Math.random()*100}%;opacity:${Math.random()*.6+.1}`;
+    c.appendChild(s);
+    gsap.to(s,{opacity:Math.random()*.4+.05,duration:Math.random()*3+1.5,repeat:-1,yoyo:true,ease:'none',delay:Math.random()*4});
+  }
+})();
+
+// ── CURSOR ──
+const cdot=document.getElementById('cdot'),cring=document.getElementById('cring');
+let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function tick(){cdot.style.left=mx+'px';cdot.style.top=my+'px';rx+=(mx-rx)*.13;ry+=(my-ry)*.13;cring.style.left=rx+'px';cring.style.top=ry+'px';requestAnimationFrame(tick);})();
+document.querySelectorAll('a,button,.sv-tool-chip,.svns-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hov'));
+});
+
+
+  }
+},75);
+
+// ── NAV ──
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>60));
+
+// ── SCROLL REVEALS ──
+document.querySelectorAll('.jr').forEach(el=>{
+  gsap.to(el,{scrollTrigger:{trigger:el,start:'top 89%',toggleActions:'play none none none'},opacity:1,y:0,duration:.9,ease:'power3.out'});
+});
+
+// ── SECTION ENTRANCES ──
+document.querySelectorAll('.sv-section').forEach(sec=>{
+  gsap.from(sec,{scrollTrigger:{trigger:sec,start:'top 82%',toggleActions:'play none none none'},opacity:0,y:40,duration:.85,ease:'power3.out'});
+});
+gsap.from('#sv-process',{scrollTrigger:{trigger:'#sv-process',start:'top 80%'},opacity:0,y:50,duration:.8,ease:'power3.out'});
+gsap.from('#sv-faq',{scrollTrigger:{trigger:'#sv-faq',start:'top 80%'},opacity:0,scale:.98,duration:.8,ease:'power3.out'});
+gsap.fromTo('.sv-cta-h',{scale:.82,opacity:0},{scrollTrigger:{trigger:'.sv-cta-h',start:'top 82%'},scale:1,opacity:1,duration:1,ease:'back.out(1.6)'});
+
+// ── SERVICE NUMBER PARALLAX ──
+document.querySelectorAll('.sv-num-big').forEach(n=>{
+  gsap.to(n,{scrollTrigger:{trigger:n.closest('.sv-section'),scrub:1.5},y:-30});
+});
+
+// ── GLOW PARALLAX ──
+document.querySelectorAll('.sv-glow').forEach(g=>{
+  gsap.to(g,{scrollTrigger:{trigger:g.closest('.sv-section'),scrub:2},y:-60,scale:1.15});
+});
+
+// ── PROCESS STEP STAGGER ──
+// Note: .sv-step elements use the .jr scroll reveal (gsap.to opacity:1).
+// The conflicting gsap.from was removed — it set opacity:0 inline then read
+// it back as the to-value, leaving steps 03 and 04 permanently at opacity:0.
+
+// ── FAQ ACCORDION ──
+document.querySelectorAll('.faq-item').forEach(item=>{
+  const btn  = item.querySelector('.faq-q');
+  const body = item.querySelector('.faq-body');
+
+  btn.addEventListener('click',()=>{
+    const open = btn.getAttribute('aria-expanded')==='true';
+
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(it=>{
+      const b=it.querySelector('.faq-q');const bd=it.querySelector('.faq-body');
+      b.setAttribute('aria-expanded','false');
+      gsap.to(bd,{height:0,duration:.38,ease:'power3.inOut',overwrite:true});
+    });
+
+    // Open clicked if was closed
+    if(!open){
+      btn.setAttribute('aria-expanded','true');
+      gsap.set(body,{height:'auto'});
+      const h=body.offsetHeight;
+      gsap.fromTo(body,{height:0},{height:h,duration:.46,ease:'power3.out',overwrite:true});
+    }
+  });
+});
+
+// ── SMOOTH ANCHOR ──
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();gsap.to(window,{scrollTo:{y:t,offsetY:70},duration:1.1,ease:'power3.inOut'});}
+  });
+});
+
+// ── MAGNETIC BUTTONS ──
+document.querySelectorAll('.btn-primary-sv,.btn-sec-sv,.btn-talk,.btn-cta').forEach(b=>{
+  b.addEventListener('mousemove',function(e){
+    const r=this.getBoundingClientRect();
+    gsap.to(this,{x:(e.clientX-r.left-r.width/2)*.32,y:(e.clientY-r.top-r.height/2)*.32,duration:.3,ease:'power2.out'});
+  });
+  b.addEventListener('mouseleave',function(){gsap.to(this,{x:0,y:0,duration:.55,ease:'elastic.out(1,.4)'});});
+});
+
+// ── HERO ENTRANCE ──
+function startPage(){
+  gsap.from('#sv-pill',{scale:0,opacity:0,duration:.6,ease:'back.out(2.5)',delay:.1});
+  gsap.to('.sv-hline-in',{y:0,duration:1.05,stagger:.14,ease:'power4.out',delay:.22});
+  gsap.to('#sv-sub',{opacity:1,y:0,duration:.9,delay:.65,ease:'power3.out'});
+  gsap.to('#sv-btns',{opacity:1,y:0,duration:.9,delay:.82,ease:'power3.out'});
+  gsap.to('.sv-hero-gl',{scale:1.12,duration:4,repeat:-1,yoyo:true,ease:'sine.inOut'});
+  gsap.to('.sv-hero-gr',{scale:1.08,duration:4.8,repeat:-1,yoyo:true,ease:'sine.inOut',delay:1});
+}
+
+
+// ── MOBILE NAV ──
+(function(){
+  const ham=document.getElementById('ham'),mobNav=document.getElementById('mob-nav');
+  if(!ham||!mobNav)return;
+  const close=()=>{ham.classList.remove('open');mobNav.classList.remove('open');ham.setAttribute('aria-expanded','false');document.body.style.overflow='';}
+  ham.addEventListener('click',()=>{
+    const open=ham.classList.toggle('open');
+    mobNav.classList.toggle('open',open);
+    ham.setAttribute('aria-expanded',String(open));
+    document.body.style.overflow=open?'hidden':'';
+  });
+  mobNav.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+})();
+
+console.log
